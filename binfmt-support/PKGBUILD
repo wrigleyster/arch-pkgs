@@ -1,14 +1,20 @@
 pkgname=binfmt-support
-pkgver=2.0.12
-pkgrel=2
+pkgver=2.0.13
+pkgrel=1
 pkgdesc="register interpreters for various binary formats"
 arch=(any)
 url="http://packages.debian.org/en/sid/binfmt-support"
 license=('GPL')
 depends=()
 makedepends=()
-source=(http://ftp.de.debian.org/debian/pool/main/b/binfmt-support/binfmt-support_$pkgver.tar.gz)
-md5sums=('7a6423d97b0a0fea21bab13626492ad9')
+source=(
+    http://ftp.de.debian.org/debian/pool/main/b/binfmt-support/binfmt-support_$pkgver.tar.gz
+    binfmts.service
+    )
+md5sums=(
+    '1128233d0724d068635f340e080eef26'
+    '5597b7b238cf8dfaddca159607fe4fb4'
+    )
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
@@ -20,4 +26,5 @@ package() {
   cd "$srcdir/$pkgname-$pkgver"
   make DESTDIR="$pkgdir/" install
   install -dm0755 $pkgdir/var/lib/binfmts
+  install -Dm755 ../binfmts.service $pkgdir/usr/lib/systemd/system/binfmts.service
 }
