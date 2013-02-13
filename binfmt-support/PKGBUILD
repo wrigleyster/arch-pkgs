@@ -1,6 +1,6 @@
 pkgname=binfmt-support
 pkgver=2.0.13
-pkgrel=2
+pkgrel=3
 pkgdesc="register interpreters for various binary formats"
 arch=(any)
 url="http://packages.debian.org/en/sid/binfmt-support"
@@ -13,7 +13,7 @@ source=(
     )
 md5sums=(
     '1128233d0724d068635f340e080eef26'
-    'ea7640fa7ad3b8f3de4968408a413006'
+    '7e71810cdd518d25926beb42468cb864'
     )
 
 build() {

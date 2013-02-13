@@ -4,9 +4,8 @@ Documentation=man:update-binfmts(8)
 
 [Service]
 Type=oneshot
-ExecStart=/usr/sbin/update-binfmts --enable
-ExecStop=/usr/sbin/update-binfmts --disable
-KillMode=process
+ExecStart=/bin/bash -c "exec /usr/sbin/update-binfmts --enable"
+KillMode=none
 Restart=no
 
 [Install]
