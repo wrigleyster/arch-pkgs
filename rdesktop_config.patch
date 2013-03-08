@@ -576,7 +576,7 @@ diff -ruNw rdesktop-1.7.1/rdesktop.c rdesktop-1.7.1.new/rdesktop.c
 +   if (g_embed_wnd == 0 && options.embedwnd >= 0 )
 +		   g_embed_wnd = options.embedwnd;
 +
-+   if (g_server_depth == -1 && options.colourdepth != -2)
++   if (g_server_depth == -1 && options.colourdepth != -1)
 +		   g_server_depth = options.colourdepth;
 +
 +   if (!g_bitmap_cache_persist_enable && options.bitmapcachepersist >= 0)
@@ -946,7 +946,7 @@ diff -ruNw rdesktop-1.7.1/readconf.c rdesktop-1.7.1.new/readconf.c
 +    options->embedwnd = -1;
 +    options->compression = -1;
 +    options->bitmapcachepersist = -1;
-+    options->colourdepth = -2;
++    options->colourdepth = -1;
 +    options->console = -1;
 +    options->rdp4 = -1;
 +    options->rdp5 = -1;

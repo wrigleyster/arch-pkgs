@@ -2,26 +2,30 @@
 # Maintainer:
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 # Contributor: Dan McGee <dan@archlinux.org>
+# Contributor: Jeremy Jethro <jjethro@hush.com>
 
-pkgname=rdesktop
+pkgname=rdesktop+config
+pkgrealname=rdesktop
 pkgver=1.7.1
-pkgrel=4
-pkgdesc="An open source client for Windows Remote Desktop Services"
+pkgrel=3
+pkgdesc="rdesktop with config support"
 arch=('i686' 'x86_64')
 url="http://www.rdesktop.org/"
 license=('GPL3')
 depends=('openssl' 'libao' 'libsamplerate' 'xorg-xrandr')
-source=("http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.gz"
+provides=('rdesktop')
+conflicts=('rdesktop')
+source=("http://downloads.sourceforge.net/${pkgrealname}/${pkgrealname}-${pkgver}.tar.gz"
         'rdesktop-send_physical_buttons.diff'
         'rdesktop-libao.patch'
         'rdesktop_config.patch')
 md5sums=('c4b39115951c4a6d74f511c99b18fcf9'
          '880d3aeac67b901e6bf44d1323374768'
          'bd2c9bc68bddcc2652c668753d787df7'
-         'a23b310926298f7586bc55426ecf4805')
+         '32fae47efceda06630359f637c3465a3')
 
 build() {
-  cd ${pkgname}-${pkgver}
+  cd ${pkgrealname}-${pkgver}
 
   # FS#15113
   patch -i "${srcdir}/rdesktop-send_physical_buttons.diff"
@@ -39,6 +43,6 @@ build() {
 }
 
 package() {
-  cd ${pkgname}-${pkgver}
+  cd ${pkgrealname}-${pkgver}
   make DESTDIR="${pkgdir}" install
 }
