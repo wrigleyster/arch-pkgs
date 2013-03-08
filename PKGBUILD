@@ -18,7 +18,7 @@ source=("http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.gz
 md5sums=('c4b39115951c4a6d74f511c99b18fcf9'
          '880d3aeac67b901e6bf44d1323374768'
          'bd2c9bc68bddcc2652c668753d787df7'
-         '8e5f757b57dd80609800f3866be41ab0')
+         'a23b310926298f7586bc55426ecf4805')
 
 build() {
   cd ${pkgname}-${pkgver}
