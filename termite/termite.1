@@ -1,0 +1,202 @@
+.TH termite 1 "March 25, 2013" "Termite v6" "User Commands"
+.SH NAME
+termite \- A keyboard-centric VTE-based terminal, aimed at use within a window manager with tiling and/or tabbing support.
+
+.SH SYNOPSIS
+.B termite
+[OPTIONS]
+
+.SH DESCRIPTION
+.B termite
+is a GTK-based terminal emulator inteded for use within window managers with tiling and/or tabbing support. It provides a fast terminal experience and pleasant array of keyboard-centric features.
+
+.SH EXIT STATUS
+.B termite
+returns 1 on failure, including a termination of the child process from an uncaught signal. Otherwise the status is that of the child process.
+
+.SH KEYBINDINGS
+.SS Insert Mode
+The
+.B Insert Mode
+is the default mode common to most terminal emulators. This is where you enter commands and interact with the programs running within
+.BR termite "."
+.TP 17
+.B ctrl-shift-x
+activate url hints mode
+.TP
+.B ctrl-shift-r
+reload configuration file
+.TP
+.B ctrl-shift-c
+copy to
+.I CLIPBOARD
+.TP
+.B ctrl-shift-v 
+paste from
+.I CLIPBOARD
+.TP
+.B ctrl-shift-u
+unicode input (standard GTK binding)
+.TP
+.B ctrl-tab
+start scrollback completion
+.TP
+.B ctrl-shift-space
+start command mode
+.TP
+.B ctrl-shift-t
+open terminal in the
+.B current directory
+.TP
+.B ctrl-shift-up
+scroll up a line
+.TP
+.B ctrl-shift-down
+scroll down a line
+.TP
+.B shift-pageup
+scroll up a page
+.TP
+.B shift-pagedown
+scroll down a page
+
+.SS Command Mode
+In
+.B Command Mode
+you interact with the interface of
+.B termite
+and the visual representation of the programs running within it. You can search, mark and copy contents from the display for use in other programs.
+
+.TP
+.B escape
+deactivate command mode
+.TP
+.B x
+activate url hints mode
+.TP
+.B v
+visual mode
+.TP
+.B V
+visual line mode
+.TP
+.B ctrl-v
+visual block mode
+.TP
+.BR hjkl " or " "arrow keys"
+move cursor left/down/up/right
+.TP
+.BR w " or " shift-right
+forward word
+.TP
+.BR b " or " shift-left
+backward word
+.TP
+.BR W " or " ctrl-right
+forward WORD (non-whitespace)
+.TP
+.BR B " or " ctrl-left
+backward WORD (non-whitespace)
+.TP
+.B 0
+move cursor to the first column in the row
+.TP
+.B ^
+beginning-of-line (first non-blank character)
+.TP
+.B $
+end-of-line
+.TP
+.B g
+jump to start of first row
+.TP
+.B G
+jump to start of last row
+.TP
+.B ctrl-u
+move cursor half a screen up
+.TP
+.B ctrl-d
+move cursor half a screen down
+.TP
+.B y
+copy to
+.I CLIPBOARD
+.TP
+.B /
+forward search
+.TP
+.B ?
+reverse search
+.TP
+.B u
+forward url search
+.TP
+.B U
+reverse url search
+.TP
+.B o
+open the current selection as a url
+.TP
+.B Return
+open the current selection as a url and exit command mode
+.TP
+.B n
+next search match
+.TP
+.B N
+previous search match
+.TP
+.B +
+increase font size
+.TP
+.B -
+decrease font size
+
+.SS Hints Mode
+The
+.B Hints Mode
+is meant for accessing weblinks output to the terminal. When active, links can be swiftly launched with only a few taps of the keyboard.
+
+.SH REMARKS
+During scrollback search, the current selection is changed to the search match and copied to the PRIMARY clipboard buffer.
+.P
+With the text input widget focused, up/down (or tab/shift-tab) cycle through completions, escape closes the widget and enter accepts the input.
+.P
+In hints mode, the input will be accepted as soon as termite considers it a unique match.
+.SS Current Directory
+The directory can be set by a process running in the terminal. For example, with
+.IR zsh :
+.nf
+
+if [[ $TERM == xterm -termite ]]; then
+  . /etc/profile.d/vte.sh
+
+  __vte_ps1
+
+  chpwd() {
+    __vte_ps1
+  }
+fi
+
+.fi
+or for example, with
+.IR bash :
+.nf
+
+if [[ $TERM == xterm-termite ]]; then
+  . /etc/profile.d/vte.sh
+  PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'__vte_ps1'
+fi
+
+.fi
+
+.SH FILES
+.B termite
+looks for the configuration file in the following order:
+.IR "$XDG_CONFIG_HOME/termite/config" ", " "~/.config/termite/config" ", " "$XDG_CONFIG_DIRS/termite/config" " and " "/etc/xdg/termite.cfg"
+
+.SH AUTHOR
+Daniel Micay \- Toronto, Canada
+.br
+danielmicay@gmail.com

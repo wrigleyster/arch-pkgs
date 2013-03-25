@@ -1,0 +1,46 @@
+# Maintainer: Daniel Micay <danielmicay@gmail.com>
+pkgname=termite
+pkgver=6
+pkgrel=1
+pkgdesc="A simple VTE-based terminal"
+arch=('i686' 'x86_64')
+url="https://github.com/thestinger/termite/"
+license=('LGPL')
+depends=('vte3-select-text>=0.34.2-1')
+makedepends=('git')
+backup=(etc/xdg/termite/config)
+install=$pkgname.install
+source=('termite.1')
+md5sums=('a60e8b9fd8e29d5384d72c17f7a36ab7')
+
+__gitroot=https://github.com/thestinger/termite
+__gitname=termite
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to GIT server...."
+
+  if [[ -d "$__gitname" ]]; then
+    cd "$__gitname" && git checkout master && git pull origin
+    msg "The local files are updated."
+  else
+    git clone "$__gitroot" "$__gitname"
+  fi
+
+  cd "$srcdir/$__gitname"
+  git submodule update --init
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting build..."
+
+  git checkout v$pkgver
+
+  make
+}
+
+package() {
+  cd "$srcdir/$__gitname"
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+  install -Dm644 config "$pkgdir/etc/xdg/termite/config"
+  install -Dm644 ../termite.1 "$pkgdir/usr/share/man/man1/termite.1"
+}
