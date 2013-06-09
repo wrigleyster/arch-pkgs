@@ -4,7 +4,7 @@ Documentation=man:update-binfmts(8)
 
 [Service]
 Type=oneshot
-ExecStart=/bin/bash -c "exec /usr/sbin/update-binfmts --enable"
+ExecStart=/bin/bash -c "exec /usr/bin/update-binfmts --enable"
 KillMode=none
 Restart=no
 

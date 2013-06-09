@@ -1,24 +1,24 @@
 pkgname=binfmt-support
-pkgver=2.0.13
-pkgrel=3
+pkgver=2.0.15
+pkgrel=1
 pkgdesc="register interpreters for various binary formats"
 arch=(any)
 url="http://packages.debian.org/en/sid/binfmt-support"
 license=('GPL')
-depends=()
+depends=('glibc' 'systemd' 'libpipeline')
 makedepends=()
 source=(
     http://ftp.de.debian.org/debian/pool/main/b/binfmt-support/binfmt-support_$pkgver.tar.gz
     binfmts.service
     )
 md5sums=(
-    '1128233d0724d068635f340e080eef26'
-    '7e71810cdd518d25926beb42468cb864'
+    'b85b5ec62cf8bbefc92523ccc3941b13'
+    '0000a524a3d97583563a0d1d6f6b1ecb'
     )
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  ./configure --prefix=/usr --libexecdir=/usr/lib
+  ./configure --prefix=/usr --libexecdir=/usr/lib --sbindir=/usr/bin
   make
 }
 
