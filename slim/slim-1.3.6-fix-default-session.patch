@@ -1,0 +1,26 @@
+=== modified file 'cfg.cpp'
+--- cfg.cpp	2015-10-28 19:34:53 +0000
++++ cfg.cpp	2015-10-28 19:35:35 +0000
+@@ -293,6 +293,9 @@
+ 
+ 	sessions.clear();
+ 
++    pair<string,string> session("","default");
++    sessions.push_back(session);
++
+ 	if( !strSessionDir.empty() ) {
+ 		DIR *pDir = opendir(strSessionDir.c_str());
+ 
+@@ -336,11 +339,6 @@
+ 			closedir(pDir);
+ 		}
+ 	}
+-
+-	if (sessions.empty()){
+-        pair<string,string> session("","");
+-        sessions.push_back(session);
+-	}
+ }
+ 
+ pair<string,string> Cfg::nextSession() {
+
